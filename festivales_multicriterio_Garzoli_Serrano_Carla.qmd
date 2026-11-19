@@ -15,6 +15,20 @@ format:
     fig-height: 5.5
     fig-align: center
     echo: false
+    format-links: false
+    other-links:
+      - text: PDF A4 ejecutivo
+        href: festivales_a4.pdf
+        icon: file-pdf
+        target: "_blank"
+      - text: PDF A4 analista
+        href: festivales_a4_analista.pdf
+        icon: file-pdf
+        target: "_blank"
+      - text: PDF póster
+        href: festivales_poster.pdf
+        icon: file-pdf
+        target: "_blank"
   typst:
     toc: true
     number-sections: true
@@ -27,6 +41,14 @@ format:
     echo: false
     include-in-header:
       - text: |
+          #set table(
+            inset: 6pt,
+            fill: (x, y) => if y == 0 { rgb("#2b6cb0") } else if calc.odd(y) { rgb("#f1f5f9") } else { white },
+            stroke: (x, y) => (bottom: 0.4pt + rgb("#cbd5e1")),
+          )
+          #show table.cell.where(y: 0): set text(fill: white, weight: "bold")
+          #show table: set text(hyphenate: false, size: 0.85em)
+          #show figure: set align(center)
   typst-analista:
     toc: true
     number-sections: true
