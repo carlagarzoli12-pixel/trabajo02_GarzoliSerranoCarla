@@ -1,0 +1,132 @@
+Version: 2.0
+
+#########################
+# Alternativas (festivales 2027)
+#########################
+Alternatives: &alternatives
+  Iconica:
+  Interestelar:
+  WeekendBeach:
+  Dreambeach:
+  MadCool:
+  ArenalSound:
+
+#########################
+# Objetivo, criterios y comparaciones por pares (escala de Saaty: 1 a 9)
+# [A, B, 3] = A es 3 veces preferido a B;  [A, B, 1/3] = B es 3 veces preferido a A
+#########################
+Goal:
+  name: Elegir el mejor festival
+  preferences:
+    pairwise:
+      - [Coste, Tiempo, 2]
+      - [Coste, Cartel, 1/2]
+      - [Coste, Logistica, 2]
+      - [Coste, Sostenibilidad, 4]
+      - [Tiempo, Cartel, 1/3]
+      - [Tiempo, Logistica, 1]
+      - [Tiempo, Sostenibilidad, 2]
+      - [Cartel, Logistica, 4]
+      - [Cartel, Sostenibilidad, 6]
+      - [Logistica, Sostenibilidad, 2]
+  children:
+    Coste:
+      # coste en euros: 68, 93, 191.25, 172.5, 439.75, 207.5 (menos coste = mejor)
+      preferences:
+        pairwise:
+          - [Iconica, Interestelar, 1]
+          - [Iconica, WeekendBeach, 3]
+          - [Iconica, Dreambeach, 3]
+          - [Iconica, MadCool, 6]
+          - [Iconica, ArenalSound, 3]
+          - [Interestelar, WeekendBeach, 2]
+          - [Interestelar, Dreambeach, 2]
+          - [Interestelar, MadCool, 5]
+          - [Interestelar, ArenalSound, 2]
+          - [WeekendBeach, Dreambeach, 1]
+          - [WeekendBeach, MadCool, 2]
+          - [WeekendBeach, ArenalSound, 1]
+          - [Dreambeach, MadCool, 3]
+          - [Dreambeach, ArenalSound, 1]
+          - [MadCool, ArenalSound, 1/2]
+      children: *alternatives
+    Tiempo:
+      # minutos de viaje: 25, 25, 165, 310, 305, 420 (menos tiempo = mejor)
+      preferences:
+        pairwise:
+          - [Iconica, Interestelar, 1]
+          - [Iconica, WeekendBeach, 7]
+          - [Iconica, Dreambeach, 9]
+          - [Iconica, MadCool, 9]
+          - [Iconica, ArenalSound, 9]
+          - [Interestelar, WeekendBeach, 7]
+          - [Interestelar, Dreambeach, 9]
+          - [Interestelar, MadCool, 9]
+          - [Interestelar, ArenalSound, 9]
+          - [WeekendBeach, Dreambeach, 2]
+          - [WeekendBeach, MadCool, 2]
+          - [WeekendBeach, ArenalSound, 3]
+          - [Dreambeach, MadCool, 1]
+          - [Dreambeach, ArenalSound, 1]
+          - [MadCool, ArenalSound, 1]
+      children: *alternatives
+    Cartel:
+      # cartel (1-10): 8, 6, 6, 4, 9, 5 (1 punto de diferencia = 1 escalon)
+      preferences:
+        pairwise:
+          - [Iconica, Interestelar, 3]
+          - [Iconica, WeekendBeach, 3]
+          - [Iconica, Dreambeach, 5]
+          - [Iconica, MadCool, 1/2]
+          - [Iconica, ArenalSound, 4]
+          - [Interestelar, WeekendBeach, 1]
+          - [Interestelar, Dreambeach, 3]
+          - [Interestelar, MadCool, 1/4]
+          - [Interestelar, ArenalSound, 2]
+          - [WeekendBeach, Dreambeach, 3]
+          - [WeekendBeach, MadCool, 1/4]
+          - [WeekendBeach, ArenalSound, 2]
+          - [Dreambeach, MadCool, 1/6]
+          - [Dreambeach, ArenalSound, 1/2]
+          - [MadCool, ArenalSound, 5]
+      children: *alternatives
+    Logistica:
+      # logistica (1-10): 10, 10, 6, 4, 6, 5 (1 punto de diferencia = 1 escalon)
+      preferences:
+        pairwise:
+          - [Iconica, Interestelar, 1]
+          - [Iconica, WeekendBeach, 5]
+          - [Iconica, Dreambeach, 7]
+          - [Iconica, MadCool, 5]
+          - [Iconica, ArenalSound, 6]
+          - [Interestelar, WeekendBeach, 5]
+          - [Interestelar, Dreambeach, 7]
+          - [Interestelar, MadCool, 5]
+          - [Interestelar, ArenalSound, 6]
+          - [WeekendBeach, Dreambeach, 3]
+          - [WeekendBeach, MadCool, 1]
+          - [WeekendBeach, ArenalSound, 2]
+          - [Dreambeach, MadCool, 1/3]
+          - [Dreambeach, ArenalSound, 1/2]
+          - [MadCool, ArenalSound, 2]
+      children: *alternatives
+    Sostenibilidad:
+      # kg de CO2: 1.08, 1.08, 21.25, 42.5, 45.05, 59.5 (menos CO2 = mejor)
+      preferences:
+        pairwise:
+          - [Iconica, Interestelar, 1]
+          - [Iconica, WeekendBeach, 9]
+          - [Iconica, Dreambeach, 9]
+          - [Iconica, MadCool, 9]
+          - [Iconica, ArenalSound, 9]
+          - [Interestelar, WeekendBeach, 9]
+          - [Interestelar, Dreambeach, 9]
+          - [Interestelar, MadCool, 9]
+          - [Interestelar, ArenalSound, 9]
+          - [WeekendBeach, Dreambeach, 2]
+          - [WeekendBeach, MadCool, 2]
+          - [WeekendBeach, ArenalSound, 3]
+          - [Dreambeach, MadCool, 1]
+          - [Dreambeach, ArenalSound, 1]
+          - [MadCool, ArenalSound, 1]
+      children: *alternatives
