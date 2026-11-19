@@ -14,6 +14,7 @@ format:
     fig-width: 9
     fig-height: 5.5
     fig-align: center
+    echo: false
   typst:
     toc: true
     number-sections: true
@@ -23,6 +24,19 @@ format:
     fig-width: 9
     fig-height: 5.5
     output-file: "festivales_a4.pdf"
+    echo: false
+    include-in-header:
+      - text: |
+  typst-analista:
+    toc: true
+    number-sections: true
+    papersize: a4
+    margin: {left: 2cm, right: 2cm, top: 2cm, bottom: 1.5cm}
+    fig-format: png
+    fig-width: 9
+    fig-height: 5.5
+    output-file: "festivales_a4_analista.pdf"
+    echo: true
     include-in-header:
       - text: |
           #set table(
@@ -36,6 +50,7 @@ format:
   #Póster
   poster-typst:
     output-file: "festivales_poster.pdf"
+    echo: false
     include-in-header:
       - text: |
           #set table(
@@ -66,8 +81,7 @@ execute:
   message: false
 ---
 
-```{r, echo=FALSE}
-#| include: false
+```{r}
 #Cargamos todas las librerias necesarias
 library(dplyr)
 library(tidyr)
@@ -101,7 +115,7 @@ Se consideran seis festivales de la temporada 2027, desde dos celebrados en la p
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 #| tbl-colwidths: [22, 20, 22, 10, 26]
 tabla=data.frame(
   `Festival` = c(
@@ -166,7 +180,7 @@ El coste, el tiempo y la sostenibilidad se miden con datos objetivos.El cartel y
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 #| tbl-colwidths: [17, 51, 16, 16]
 tabla=data.frame(
   `Criterio` = c(
@@ -209,7 +223,7 @@ Para los métodos que trabajan con una matriz de decisión (ELECTRE, PROMETHEE, 
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 alternativas=c("Iconica", "Interestelar", "WeekendBeach", "Dreambeach", "MadCool", "ArenalSound")
 criterios=c("Coste", "Tiempo", "Cartel", "Logistica", "Sostenibilidad")
 
@@ -229,7 +243,7 @@ kable(mdec, digits = 2, align = "c")
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 #| label: fig-heatmap
 #| fig-cap: "Matriz de decisión homogeneizada con el método Nadir (0 = peor valor del criterio, 1 = mejor)."
 grafico_heatmap(multicriterio.homogeneizacion.nadir(mdec))
@@ -237,7 +251,7 @@ grafico_heatmap(multicriterio.homogeneizacion.nadir(mdec))
 
 :::
 
-```{r, echo=FALSE}
+```{r}
 #| label: fig-coste-tiempo
 #| fig-cap: "Coste total y tiempo de viaje de cada festival. Los de Sevilla están en la   izquierda y los grandes carteles a la derecha."
 df_graf=data.frame(id = alternativas, coste_total = -mdec[, "Coste"],
@@ -255,11 +269,11 @@ grafico_coste_tiempo(df_graf) +
 
 El modelo está en el fichero `festivales.ahp` (formato del paquete `ahp`), con los festivales, la jerarquía de criterios y las comparaciones por pares:
 
-```{r, echo=FALSE}
+```{r}
 datos=Load("festivales.ahp")
 ```
 
-```{r, echo=FALSE}
+```{r}
 #| label: fig-arbol-ahp
 #| fig-cap: "Jerarquía AHP del problema."
 #| screenshot.opts: {vwidth: 1150, vheight: 420, zoom: 2}
@@ -267,7 +281,7 @@ datos=Load("festivales.ahp")
 Visualize(datos)
 ```
 
-```{r, echo=FALSE}
+```{r}
 invisible(Calculate(datos))
 t1=AnalyzeTable(datos, sort = "orig")
 t2=AnalyzeTable(datos, variable = "priority", sort = "orig")
@@ -293,7 +307,7 @@ Pesos globales de los criterios que se usarán también en los demás métodos:
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 c1=0.2449            #Coste
 c2=0.1297            #Tiempo
 c3=0.4380            #Cartel
@@ -307,7 +321,7 @@ kable(data.frame(Criterio = criterios, `Peso global (%)` = round(100 * criterios
 
 :::
 
-```{r, echo=FALSE}
+```{r}
 #| label: fig-ahp-barras
 #| fig-cap: "AHP: prioridad global de cada festival (%)."
 plot_barras_vector(v_datos=round(valores_AHP, 2),
@@ -315,7 +329,7 @@ plot_barras_vector(v_datos=round(valores_AHP, 2),
                    subtitulo="Mayor valor es MEJOR (%)")
 ```
 
-```{r, echo=FALSE}
+```{r}
 #| screenshot.opts: {vwidth: 900, zoom: 2}
 formattable::as.htmlwidget(t1)
 ```
@@ -334,7 +348,7 @@ Por último, la inconsistencia es muy baja, es del 0,3 % en la matriz de los cri
 
 La segunda tabla muestra las prioridades **locales**, es decir, cómo se ordenan las alternativas dentro de cada criterio:
 
-```{r, echo=FALSE}
+```{r}
 #| screenshot.opts: {vwidth: 900, zoom: 2}
 formattable::as.htmlwidget(t2)
 ```
@@ -345,7 +359,7 @@ Los pesos son los obtenidos con AHP (`criterios_sub`, suman 1). Para cada criter
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 #| tbl-colwidths: [14, 20, 22, 44]
 tabla = data.frame(
   `Criterio` = c(
@@ -382,7 +396,7 @@ kable(tabla,caption = "Funciones de preferencia de PROMETHEE.", align = "c")
 
 Matriz con las funciones de preferencia de cada criterio (columnas: número de función, q, p y s). Los pesos son los de AHP y suman 1.
 
-```{r, echo=FALSE}
+```{r}
 pesos.criterios=criterios_sub
 tab.fpref=matrix(c(5,20,200,0,# Coste
                      5,30,240,0,# Tiempo
@@ -402,7 +416,7 @@ kable(tab.fpref_ver,caption = "Matriz de funciones de preferencia.", align = "c"
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 tabla_Promethee.i=multicriterio.metodo.promethee_i(mdec, pesos.criterios, tab.fpref)
 kable(tabla_Promethee.i$tablarelacionsupera, caption = "PROMETHEE I: relación de superación.", align = "c")
 ```
@@ -411,12 +425,12 @@ kable(tabla_Promethee.i$tablarelacionsupera, caption = "PROMETHEE I: relación d
 
 Y los flujos de cada festival:
 
-```{r, echo=FALSE}
+```{r}
 res=multicriterio.metodo.promethee_windows(mdec, tab.fpref, pesos.criterios)
 kable(res$Acciones, digits = 4, align = "c", caption = "PROMETHEE I: flujos de cada festival.")
 ```
 
-```{r, echo=FALSE}
+```{r}
 #| fig-cap: "PROMETHEE I: flujos Φ+ y Φ- de cada festival."
 plot_promethee_I(setNames(res$Acciones$Phi.mas, rownames(res$Acciones)),
                  setNames(res$Acciones$Phi.menos, rownames(res$Acciones)))
@@ -434,13 +448,13 @@ La única pareja de festivales que PROMETHEE I deja como **incomparable** es Wee
 
 ## PROMETHEE II
 
-```{r, echo=FALSE}
+```{r}
 tabla_promethee_II=multicriterio.metodo.promethee_ii(mdec, pesos.criterios, tab.fpref)
 ```
 
 El flujo neto de cada festival da la ordenación completa:
 
-```{r, echo=FALSE}
+```{r}
 #| fig-cap: "PROMETHEE II: flujo neto de cada festival."
 v1=res$Acciones$Phi
 names(v1)=rownames(res$Acciones)
@@ -451,7 +465,7 @@ plot_barras_vector(v_datos = round(v1, 4),
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 fn=sort(v1, decreasing = TRUE)
 kable(data.frame(Posición = seq_along(fn), Festival = names(fn), `Flujo neto` = round(unname(fn), 2), check.names = FALSE), align = "ccc", caption = "PROMETHEE II: ordenación por flujo neto.")
 ```
@@ -470,7 +484,7 @@ Weekend Beach y Mad Cool tienen un flujo neto negativo pero muy cercano a cero, 
 
 Partimos de alfa = 0,7 y definimos un veto en el coste (300 €) y en el tiempo de viaje (240 min).Esto significa que,por muy bueno que sea el cartel,no vale la pena un festival que cueste 300 € más ni uno que nos haga viajar 4 horas más.El resto de criterios no tienen veto.
 
-```{r, echo=FALSE}
+```{r}
 condicion=c(300, 240, Inf, Inf, Inf)
 
 it1=multicriterio.metodoELECTRE_I(mdec,pesos.criterios= criterios_sub,
@@ -479,13 +493,13 @@ it1=multicriterio.metodoELECTRE_I(mdec,pesos.criterios= criterios_sub,
                                     que.alternativas=TRUE)
 ```
 
-```{r, echo=FALSE}
+```{r}
 kable(data.frame(Núcleo = names(it1$nucleo_aprox)), caption = "ELECTRE I (alfa = 0,7): núcleo.", align = "c")
 ```
 
 Tras aplicar el método ELECTRE una vez, el núcleo está formado por Icónica y Mad Cool.Como seguimos teniendo dos alternativas y queremos quedarnos con una, repetimos el método solo con esas dos.
 
-```{r, echo=FALSE}
+```{r}
 it2=multicriterio.metodoELECTRE_I(mdec, pesos.criterios=criterios_sub,
                                     nivel.concordancia.minimo.alpha=0.7,
                                     no.se.compensan=condicion,
@@ -494,7 +508,7 @@ it2=multicriterio.metodoELECTRE_I(mdec, pesos.criterios=criterios_sub,
 
 Seguimos teniendo el mismo núcleo, así que bajamos el nivel mínimo de concordancia a 0,55.
 
-```{r, echo=FALSE}
+```{r}
 it3=multicriterio.metodoELECTRE_I(mdec, pesos.criterios = criterios_sub,
                                     nivel.concordancia.minimo.alpha = 0.55,
                                     no.se.compensan = condicion,
@@ -516,14 +530,14 @@ Al bajar la concordancia a 0,55, Icónica supera a Mad Cool y el núcleo final q
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 topsis=multicriterio.metodo.topsis(mdec, criterios_sub)
 kable(topsis$tabla, align = "c")
 ```
 
 :::
 
-```{r, echo=FALSE}
+```{r}
 #| label: fig-topsis
 #| fig-cap: "TOPSIS: cercanía relativa a la solución ideal."
 plot_barras_vector(v_datos=round(topsis$cerca_ideal, 4),
@@ -541,7 +555,7 @@ Con TOPSIS el festival más cercano a la solución ideal es Icónica 0,89, con b
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 arrow=multicriterio.metodoaxiomatico.ArrowRaymond(mdec)
 v_ar=seq_along(arrow$alternativasordenadas)
 names(v_ar)=arrow$alternativasordenadas
@@ -562,7 +576,7 @@ Este método ordena así: Icónica, Interestelar, Weekend Beach, Mad Cool, Dream
 
 La siguiente tabla recoge la posición (1 = mejor) que da cada método a cada festival:
 
-```{r, echo=FALSE}
+```{r}
 r1=rank(-valores_AHP[alternativas])
 r2=rank(-tabla_promethee_II$vflujos.netos[alternativas])
 r3=rank(-topsis$cerca_ideal[alternativas])
@@ -583,7 +597,7 @@ Viendo la tabla se observa que Icónica es la primera en los cuatro métodos e I
 
 ::: {.content-hidden when-meta="poster"}
 
-```{r, echo=FALSE}
+```{r}
 ganadores=c(
   "AHP"             = names(which.max(valores_AHP)),
   "PROMETHEE II"    = names(which.max(tabla_promethee_II$vflujos.netos)),
