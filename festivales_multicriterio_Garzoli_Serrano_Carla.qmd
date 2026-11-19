@@ -157,7 +157,7 @@ Siendo las fuentes de donde proceden:
 ::: {.callout-warning}
 ## Sobre los datos
 
-Los datos de los festivales de 2027 aún no están todos cerrados.Se han usado las fechas de 2027 cuando ya están anunciadas en el caso de Arenal Sound, Icónica y los precios de 2027 solo cuando existen** Icónica.En el resto, los de la última edición conocida, indicándolo arriba.Algunos valores son estimaciones como el precio del abono de Interestelar,alojamiento por noche, kilómetros y tiempos de viaje por carretera (según mi criterio) y las dos valoraciones subjetivas que son cartel y logística.
+Los datos de los festivales de 2027 aún no están todos cerrados.Se han usado las fechas de 2027 cuando ya están anunciadas en el caso de Arenal Sound, Icónica y los precios de 2027 solo cuando existen Icónica.En el resto, los de la última edición conocida, indicándolo arriba.Algunos valores son estimaciones como el precio del abono de Interestelar,alojamiento por noche, kilómetros y tiempos de viaje por carretera (según mi criterio) y las dos valoraciones subjetivas que son cartel y logística.
 :::
 
 # Criterios
@@ -251,7 +251,7 @@ grafico_coste_tiempo(df_graf) +
 # Método AHP
 
 - **Criterios.** Los juicios entre criterios se han hecho pensando en el perfil descrito.El cartel es lo más importante, seguido del coste y, a distancia, tiempo y logística. La sostenibilidad es el criterio de menor peso.
-- **Alternativas.** En cada criterio se comparan los festivales por pares con la escala de de 1 a 9. En coste, tiempo y emisiones, cuantas veces es mejor un festival que otro.En cartel y logística, la diferencia de puntos: 1 punto de diferencia es un escalón de la escala.
+- **Alternativas.** En cada criterio se comparan los festivales por pares con la escala de 1 a 9. En coste, tiempo y emisiones, cuantas veces es mejor un festival que otro.En cartel y logística, la diferencia de puntos: 1 punto de diferencia es un escalón de la escala.
 
 El modelo está en el fichero `festivales.ahp` (formato del paquete `ahp`), con los festivales, la jerarquía de criterios y las comparaciones por pares:
 
