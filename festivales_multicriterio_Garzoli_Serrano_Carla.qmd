@@ -17,15 +17,15 @@ format:
     echo: false
     format-links: false
     other-links:
-      - text: PDF A4 ejecutivo
+      - text: Typst (ejecutivo)
         href: festivales_a4.pdf
         icon: file-pdf
         target: "_blank"
-      - text: PDF A4 analista
+      - text: Typst (analista)
         href: festivales_a4_analista.pdf
         icon: file-pdf
         target: "_blank"
-      - text: PDF póster
+      - text: Typst (póster)
         href: festivales_poster.pdf
         icon: file-pdf
         target: "_blank"
