@@ -575,8 +575,6 @@ Con TOPSIS el festival más cercano a la solución ideal es Icónica 0,89, con b
 
 # Método axiomático de Arrow y Raymond
 
-::: {.content-hidden when-meta="poster"}
-
 ```{r}
 arrow=multicriterio.metodoaxiomatico.ArrowRaymond(mdec)
 v_ar=seq_along(arrow$alternativasordenadas)
@@ -585,8 +583,6 @@ plot_barras_vector(v_datos=v_ar, Ordenados = 1,
                    titulo = "Arrow y Raymond: orden de preferencia",
                    subtitulo = "Cuanto menor valor es MEJOR")
 ```
-
-:::
 
 ::: {.callout-tip}
 ## Conclusiones
